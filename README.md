@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Walmart Furniture Image Classification and Captioning
 
 ## Note:
@@ -79,3 +80,9 @@ ii.	Medium sized pictures are 180 pixels x 180 pixels with white boundries
 |Image(Simple)|Recommendation|Recommendation(Image)|
 |-------------|--------------|-------|
 |![coffee table](coffeetable.png)| <ul><li>Beige Floor Lamp</li><li>Tan Ottoman</li></ul>|<ul><li>![lamp](lamp.png)</li><li>Decmode 59 Inch Contemporary Iron and Bamboo Floor Lamp, Beige</li></ul>
+=======
+## Picture Captioning Capstone
+
+This project is under construction, it will be continuously updated with a timeline of finishing in Late January 2018. More to follow soon!
+
+>>>>>>> 2631a7c52c252e1cf606130871262761dfe3a0a2
