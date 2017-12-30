@@ -1,5 +1,5 @@
 
-# Walmart Furniture Image Classification and Captioning
+# Walmart Home Furnishing Image Classification and Captioning
 
 ## Note:
 
@@ -28,6 +28,7 @@ Multiple steps to get and collect data:
 2.	Use Walmart’s API to get product information and images for each product ID
   * API returns as a JSON dictionary
   * Limitations:
+  
          *	API restricted to 20 product ID’s per call
          *	5 calls per second
          *	5,000 calls per day
