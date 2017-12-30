@@ -12,6 +12,7 @@ Many large companies are exploring Augmented Reality ‘AR’ as it becomes main
 3.	Determining multiple objects in one room
 4.	Making recommendations for new objects based on objects already in room
 5.	UI/UX Augmented Reality programming that is beyond the scope of my knowledge
+
 There are many steps to this project and I would like to start with the first few as outlined below.  
 
 ## Goal
@@ -27,10 +28,9 @@ Multiple steps to get and collect data:
 2.	Use Walmart’s API to get product information and images for each product ID
   * API returns as a JSON dictionary
   * Limitations:
-  
-        *	API restricted to 20 product ID’s per call
-        *	5 calls per second
-        *	5,000 calls per day
+         *	API restricted to 20 product ID’s per call
+         *	5 calls per second
+         *	5,000 calls per day
 3.	Store all info in a MongoDB Database
   * Query required info and download pictures from URL’s
   * Medium sized pictures are 180 pixels x 180 pixels with white boundaries
