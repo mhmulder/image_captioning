@@ -22,19 +22,17 @@ For my project, I plan to develop an automatic image classification for various 
 
 Multiple steps to get and collect data:
 1.	Scrape Product ID’s from Walmart’s website in the furniture section
-•	Approximately 400,000 entries
-•	I will likely use about 100,000 but it will depend on results
+  * Approximately 400,000 entries
+  *  I will likely use about 100,000 but it will depend on results
 2.	Use Walmart’s API to get product information and images for each product ID
-•	API returns as a JSON dictionary
-i.	Sample return in Appendix 1
-•	Limitations:
-i.	API restricted to 20 product ID’s per call
-ii.	5 calls per second
-iii.	5,000 calls per day
+  * API returns as a JSON dictionary
+  * Limitations:
+        *	API restricted to 20 product ID’s per call
+        *	5 calls per second
+        *	5,000 calls per day
 3.	Store all info in a MongoDB Database
-•	Query required info and download pictures from URL’s
-i.	Sample query in Appendix 2
-ii.	Medium sized pictures are 180 pixels x 180 pixels with white boundries
+  * Query required info and download pictures from URL’s
+  * Medium sized pictures are 180 pixels x 180 pixels with white boundaries
 4.	Use the pictures as features and the in other information as labels and train a net
 
 ## Project Progression
