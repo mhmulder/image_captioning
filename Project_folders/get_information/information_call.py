@@ -10,6 +10,14 @@ import os
 import json
 import urllib
 import pickle
+import pymongo
+from pymongo import MongoClient
+import pprint
+from bson import json_util
+import json
+import pickle
+import pprint
+import sys
 
 SECRET_KEY = os.environ["WM_SECRET_ACCESS_KEY"]
 
@@ -40,7 +48,7 @@ def segment_and_concat_id_list_for_api(id_list, segment_num):
     return concat_ids_for_api
 
 def load_json_from_api(items, apiKey):
-    time.sleep(2)
+    time.sleep(.25)
     url = "http://api.walmartlabs.com/v1/items?ids={0}&apiKey={1}&format=json".format(items, apiKey)
     data = json.load(urllib.request.urlopen(url))
     return data
@@ -52,28 +60,50 @@ def pickle_json_data_dict(pickle_name, data):
     pickle.dump(data,tmp)
     print("pickle saved")
 
-def run_all(filepath, segment_num):
+
+def run_all(filepath, collocetion, start, end, segment_num=20):
     id_list = open_csv_with_ids(filepath)
-    print ("id_list imported successfully")
+    print ("id_list imported successfully.")
     unique_id_list= remove_duplicates(id_list)
-    print ("unique list created successfully")
+    print ("unique list created successfully.")
     segmented_ids = segment_and_concat_id_list_for_api(unique_id_list, segment_num)
     print ("segmented list created successfully, {} total segments".format(len(segmented_ids)))
-
-    for number, segment in enumerate(segmented_ids):
-        if number == 0:
+    short_list = segmented_ids[start:end]
+    for number, segment in enumerate(short_list):
+        try:
             data_dict = load_json_from_api(segment, SECRET_KEY)
-            print ('segment complete {}/{}'.format(number + 1, len(segmented_ids)))
-        else:
-            temp_dict = load_json_from_api(segment, SECRET_KEY)
-            for item in temp_dict['items']:
-                data_dict['items'].append(item)
-            print ('segment complete {}/{}'.format(number + 1, len(segmented_ids)))
-    pickle_json_data_dict('200_lines', data_dict)
+        except:
+            ###Error handles HTML timeout from walmarts gateat error 504
+            time.sleep(2)
+            print('Error Handled')
+            data_dict = load_json_from_api(segment, SECRET_KEY)
+        for item in data_dict['items']:
+            collection.replace_one(
+                {'itemId': item['itemId']},
+                item, upsert=True)
+        print ('segment complete {}/{}, there are {} items in the collection.'
+                .format(number + start, len(segmented_ids), collection.count()))
+
 
 if __name__ == '__main__':
     # id_list = open_csv_with_ids('../UPC_scraping/5_pages_product_ids')
     # unique_id_list= remove_duplicates(id_list)
     # segmented_ids = segment_and_concat_id_list_for_api(unique_id_list,20)
     # print (segmented_ids)
-    run_all('../UPC_scraping/5_pages_product_ids',20)
+    client = MongoClient()
+    db = client.capstone_project
+    collection = db.product_id_returns
+    start = int(sys.argv[1])
+    end = int(sys.argv[2])
+
+    run_all('get_information/all_ids', collection, start, end)
+
+    # results = collection.find({'$or': [{'availableOnline' : False}, {'availableOnline' : True}]},
+    #                                 {'itemId': 1,
+    #                                  'shortDescription' : 1,
+    #                                  'imageEntities.thumbnailImage' : 1,
+    #                                  'categoryPath' : 1,
+    #                                  'name' : 1})
+    # for result in results:
+    #     pprint.pprint(result)
+    # print (results.count())

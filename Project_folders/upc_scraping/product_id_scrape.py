@@ -29,7 +29,7 @@ def load_main_search(query, price_min, price_max):
     price_sort = ['high', 'low']
     ids = []
     for i in range(price_min, price_max + 1):
-        print('current query from ${} to ${}.'.format(i, i+1))
+        print('Current query from ${} to ${}.'.format(i, i+1))
         url = ("https://www.walmart.com/search/" +
                "?cat_id=4044_103150&grid=true&max_price=" +
                "{0}&min_price={1}&page=1&query={2}&red".format(i+1, i, query) +
@@ -70,7 +70,7 @@ def load_main_search(query, price_min, price_max):
                             ids.append(scrape_info)
                             print("{0} id's appended from page {1}/{2}"
                                   .format(len(scrape_info), page, pages) +
-                                  "using the {0} sort.".format(price))
+                                  " using the {0} sort.".format(price))
                 else:
                     for page in range(1, pages+1):
                         time.sleep(np.random.normal(1.3, 1/5))
@@ -127,13 +127,13 @@ def run(query, price_min, price_max, filename):
     None, but creates numerous csv's in the parent folder.
     """
     price_range_by_ten = np.arange(price_min, price_max, 10)
-    for i in range(0, len(price_range_by_ten)-1):
+    for i in range(0, len(price_range_by_ten)-2):
         print('Now starting range {} to {}'.format(price_range_by_ten[i],
                                                    price_range_by_ten[i+1]))
         ids = load_main_search(query, price_range_by_ten[i],
                                price_range_by_ten[i+1])
         unique_ids = clean_id_list(ids)
-        print("saving {} unique ids".format(len(unique_ids)))
+        print("Saving {} unique ids".format(len(unique_ids)))
         save_2_csv(unique_ids, str(filename +
                                    str(price_range_by_ten[i]) +
                                    str(price_range_by_ten[i+1])))
@@ -177,7 +177,7 @@ def save_2_csv(clean_ids, filename):
     with open(filename, 'w', newline='') as myfile:
         wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
         wr.writerow(clean_ids)
-    print("file saved as {}".format(filename))
+    print("File saved as {}".format(filename))
 
 
 def concat_all_csv(output_filename):
@@ -207,4 +207,4 @@ def concat_all_csv(output_filename):
 
 if __name__ == '__main__':
     # start the query for furniture
-    idlist = run("furniture", 30, 3000, 'data/unique_ids')
+    idlist = run("furniture", 10, 511, 'data_day3/unique_ids_day_3')
