@@ -76,7 +76,12 @@ def run_all(filepath, collocetion, start, end, segment_num=20):
             ###Error handles HTML timeout from walmarts gateat error 504
             time.sleep(2)
             print('Error Handled')
-            data_dict = load_json_from_api(segment, SECRET_KEY)
+            try:
+                data_dict = load_json_from_api(segment, SECRET_KEY)
+            except:
+                print ('400 error')
+                continue
+
         for item in data_dict['items']:
             collection.replace_one(
                 {'itemId': item['itemId']},
@@ -96,7 +101,7 @@ if __name__ == '__main__':
     start = int(sys.argv[1])
     end = int(sys.argv[2])
 
-    run_all('get_information/all_ids', collection, start, end)
+    run_all('all_ids', collection, start, end)
 
     # results = collection.find({'$or': [{'availableOnline' : False}, {'availableOnline' : True}]},
     #                                 {'itemId': 1,

@@ -207,4 +207,4 @@ def concat_all_csv(output_filename):
 
 if __name__ == '__main__':
     # start the query for furniture
-    idlist = run("furniture", 10, 511, 'data_day3/unique_ids_day_3')
+    idlist = run("furniture", 20, 511, 'data_day3/unique_ids_day_3')
