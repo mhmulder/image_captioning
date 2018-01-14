@@ -13,6 +13,7 @@ Project_folders/hidden_notes/
 # Images #
 ###################
 *.jpg
+*.pem
 
 
 # Compiled source #
@@ -23,6 +24,7 @@ Project_folders/hidden_notes/
 *.exe
 *.o
 *.so
+*.pkl
 
 # Packages #
 ############
