@@ -21,10 +21,10 @@ from collections import defaultdict
 import sys
 import glob
 import alert_program
-
+import boto3
 
 def run_query(collection):
-    rgx = re.compile('HOME/Furniture/Kitchen & Dining Furniture.*', re.IGNORECASE)
+    rgx = re.compile('HOME/Furniture.*', re.IGNORECASE)
     new_results = collection.find({'$and': [{'categoryPath': rgx}, {'imageEntities.thumbnailImage' : {'$exists': True}}]},
                                     {'itemId': 1,
                                      'categoryPath' : 1,
@@ -53,7 +53,7 @@ def create_img_dict(filepath, verbose=0):
     high_num = 0
     for elem in img_list:
         # test = elem.strip('.jpg').split('_')
-        img_num, img_product = elem.strip('.jpg').split('_')
+        img_product, img_num = elem.strip('.jpg').split('_')
         img_num = int(img_num)
         img_dict[img_product].append(img_num)
         if img_num > high_num:
@@ -63,26 +63,31 @@ def create_img_dict(filepath, verbose=0):
     return img_dict, high_num, img_list
 
 
-def get_photos(results, filepath, start, end):
-    img_dict, high_num, old_list = create_img_dict(filepath)
-    img_num = high_num
+def get_photos(results, filepath, start, end, csv_name):
+    img_dict, high_num, old_list = create_img_dict(csv_name)
+    img_num = 0
     img_list = []
+    results = [result for result in results]
     for i in range(start, end):
         if i % 10 == 0:
-            print ('Now downloading pictures from product number {}'.format(i))
+            print ('Now downloading pictures from product number {}/{}'.format(i, len(results)))
             append_to_csv(filepath, old_list, img_list)
         item_id = results[i]['itemId']
         if str(item_id) in img_dict:
             continue
-        for item in results[i]['imageEntities']:
-            time.sleep(0.2)
+        for counter, item in enumerate(results[i]['imageEntities']):
+            # time.sleep(0.2)
             img_num += 1
             url = item['thumbnailImage']
-            filename = '{:06}_{}.jpg'.format(img_num,item_id)
+            filename = '{}_{:02}.jpg'.format(item_id,counter)
             file_path = 'pics/{}'.format(filename)
-            urllib.request.urlretrieve(url, file_path)
+            try:
+                urllib.request.urlretrieve(url, file_path)
+            except:
+                continue
             img_list.append(filename)
-    print ('{} images downloaded'.format(img_num-high_num))
+    print ('{} total images in directory.'.format(img_num))
+    append_to_csv(filepath, old_list, img_list)
 
 def get_ids_from_directory():
     print (os.getcwd())
@@ -94,16 +99,28 @@ def get_ids_from_directory():
     append_to_csv('pics/img_list.csv', img_list, img_list)
     return (files)
 
+def download_csv_from_s3(s3_client, bucket_name, remote_filename, local_filename ):
+    # Download the file from S3
+    s3_client.download_file(bucket_name, remote_filename, local_filename)
+
+
+
+
+
 
 if __name__ == '__main__':
     start = int(sys.argv[1])
     end = int(sys.argv[2])
-    client = MongoClient()
+    # s3_client = boto3.client('s3')
+    # download_csv_from_s3(s3_client, 'mm-capstone-images', 'pictures/img_list.csv', 'img_list.csv')
+    mongo_password = os.environ['capstone_mongo']
+    client = MongoClient(mongo_password)
     db = client.capstone_project
     collection = db.product_id_returns
     results = run_query(collection)
+    # print (results[0])
     try:
-        get_photos(results, 'pics/img_list.csv', start, end)
+        get_photos(results, 'pics/img_list.csv', start, end, 'img_list.csv')
     except:
         alert_program.send_end_alert('capstone', 'You have an error!')
     # files = get_ids_from_directory()
