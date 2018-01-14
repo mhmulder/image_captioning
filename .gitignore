@@ -36,6 +36,8 @@ Project_folders/hidden_notes/
 *.rar
 *.tar
 *.zip
+*.pyc
+*.csv
 
 
 # Logs and databases #
@@ -53,3 +55,4 @@ Project_folders/hidden_notes/
 .Trashes
 ehthumbs.db
 Thumbs.db
+*checkpoint.ipynb
