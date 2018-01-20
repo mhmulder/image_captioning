@@ -1,9 +1,5 @@
-import requests
-from bs4 import BeautifulSoup
-from urllib.request import urlopen as uReq
-import numpy as np
-import pandas as pd
-import re
+
+import urllib.request
 import time
 import csv
 import os
@@ -12,11 +8,6 @@ import urllib
 import pickle
 import pymongo
 from pymongo import MongoClient
-import pprint
-from bson import json_util
-import json
-import pickle
-import pprint
 import sys
 
 SECRET_KEY = os.environ["WM_SECRET_ACCESS_KEY"]
@@ -91,17 +82,13 @@ def run_all(filepath, collocetion, start, end, segment_num=20):
 
 
 if __name__ == '__main__':
-    # id_list = open_csv_with_ids('../UPC_scraping/5_pages_product_ids')
-    # unique_id_list= remove_duplicates(id_list)
-    # segmented_ids = segment_and_concat_id_list_for_api(unique_id_list,20)
-    # print (segmented_ids)
     client = MongoClient()
     db = client.capstone_project
     collection = db.product_id_returns
     start = int(sys.argv[1])
     end = int(sys.argv[2])
 
-    run_all('all_ids', collection, start, end)
+    run_all('../../data/all_ids', collection, start, end)
 
     # results = collection.find({'$or': [{'availableOnline' : False}, {'availableOnline' : True}]},
     #                                 {'itemId': 1,

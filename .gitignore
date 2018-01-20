@@ -1,16 +1,9 @@
 # Specific files #
 ##################
-Project_folders/upc_scraping/data/
-Project_folders/upc_scraping/__pycache__/
-Project_folders/upc_scraping/.ipynb_checkpoints/
-Project_folders/upc_scraping/data_day3/
-Project_folders/get_information/all_ids
-Project_folders/get_information/mongo_sandbox.ipynb
-Project_folders/deprecated/
-Project_folders/image_Scraping/pics/
-Project_folders/hidden_notes/
+data/
 
-# Images #
+
+# Images and other files #
 ###################
 *.jpg
 *.pem

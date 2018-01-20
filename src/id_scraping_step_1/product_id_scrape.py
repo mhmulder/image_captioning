@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from urllib.request import urlopen as uReq
 import numpy as np
 import pandas as pd
 import re
@@ -207,4 +206,4 @@ def concat_all_csv(output_filename):
 
 if __name__ == '__main__':
     # start the query for furniture
-    idlist = run("furniture", 20, 511, 'data_day3/unique_ids_day_3')
+    idlist = run("furniture", 20, 511, '../../data/unique_ids')
