@@ -19,7 +19,7 @@ Many large companies are exploring Augmented Reality ‘AR’ as it becomes main
     * [Processing](#processing)
     * [Net Architecture](#net-architecture)
 3. [Results](#results)
-4. [Criticisms of the Model](#Evaluations-and-Criticizing-the-Model)
+4. [Criticisms of the Model](#evaluations-and-criticizing-the-model)
 5. [Next Steps](#next-steps)
 6. [Tech Stack](#tech-stack)
 7. [References](#references)
