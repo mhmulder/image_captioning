@@ -59,13 +59,21 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 * RNN(LSTM, Bidirectional LSTM)
 
 ## Methodology
-### EDA
 ### Scraping
+### EDA
+![cat hist](images/Cat_hist.png)
+
+![word_count](images/word_count.png)
+
+![word_count500](images/word_count500.png)
+
+![word_cloud](images/word_cloud.png)
 ### Sample Data
+
 ### Processing
 ### Net Architecture
-![predictions](images/red.png)
-![predictions](images/blue.png)
+![image processing](images/red.png)
+![text processing](images/blue.png)
 
 ![green](images/green.png)
 
@@ -83,4 +91,6 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 ## Next Steps
 ## Tech Stack
 ## References
- (1) [Very Deep Convolutional Networks for Large-Scale Image Recognition <br>K. Simonyan, A. Zisserman <br>arXiv:1409.1556](#https://arxiv.org/abs/1409.1556)
+(1) Very Deep Convolutional Networks for Large-Scale Image Recognition  
+K. Simonyan, A. Zisserman  
+arXiv:1409.1556 [[link]](#https://arxiv.org/abs/1409.1556)
