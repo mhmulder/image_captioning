@@ -29,6 +29,7 @@ Many large companies are exploring Augmented Reality ‘AR’ as it becomes main
     <td>![bar stool](images/barstool1.png)</td>
     <td>Brown Modern Bar Stools</td>
   </tr>
+</table>
 
 
 ## Table of Contents
