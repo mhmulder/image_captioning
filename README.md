@@ -90,6 +90,9 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 
 |Epoch|Bed with Mattress|Wire Shelving|Night Stand| Groovy Book Case| Bar Stool| Hutch|
 |-----|-----------------|-------------------------|-----------------|----------|------|
+
+
+<br><br>
 |   N/A  | ![bed](images/666628453_00.jpg)|![shelving](images/385834872_00.jpg)|![night stand](images/43173075_00.jpg)|![book case](images/509514872_02.jpg)|![bar stool](images/880209179_01.jpg)|![hutch](images/121464254_02.jpg)
 | 1| panel bed| tier addon truck|bookcase shelf|tier shelf shelf shelf|bar stool|drawer nightstand|
 | 2|upholstered platform bed|tier chrome addon shelving unit|drawer nightstand|modern contemporary urban design table black|adjustable adjustable bar stool|drawer nightstand|
