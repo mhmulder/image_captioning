@@ -13,7 +13,7 @@ Many large companies are exploring Augmented Reality ‘AR’ as it becomes main
 
 ## Table of Contents
 1. [Overview of Nets Used](#overview-of-nets-used)
-2. [Methodology](methodology)
+2. [Methodology](#methodology)
     * [Scraping](#scraping)
     * [Sample Data](#sample-data)
     * [Processing](#processing)
