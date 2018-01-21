@@ -12,11 +12,23 @@ If you are just here to read a notebook on how to build a image captioning net i
 Many large companies are exploring Augmented Reality ‘AR’ as it becomes mainstream. Walmart in particular is considering using this technology to enhance their home furnishings business. One goal is to take a photo from a room in a customer’s house and use AR to make recommendations for furniture they should add or swap out. Below is an example of the goal of this project.
 
 ### Example
-|Image|Caption|
-|-------------|-----|
-|![coffee table](images/coffeetable.png)|Wood Metal Coffee Table |
-|![sectional sofa](images/sofa1.png)|Black Modern Sectional Sofa|
-|![bar stool](images/barstool1.png)|Brown Modern Bar Stools
+<table align="center">
+  <tr>
+    <th>Image</th>
+    <th>Caption</th>
+  </tr>
+  <tr>
+    <td>![coffee table](images/coffeetable.png)</td>
+    <td>Wood Metal Coffee Table</td>
+  </tr>
+  <tr>
+    <td>![sectional sofa](images/sofa1.png)</td>
+    <td>Black Modern Sectional Sofa</td>
+  </tr>
+  <tr>
+    <td>![bar stool](images/barstool1.png)</td>
+    <td>Brown Modern Bar Stools</td>
+  </tr>
 
 
 ## Table of Contents
@@ -36,11 +48,16 @@ Many large companies are exploring Augmented Reality ‘AR’ as it becomes main
 
 ## Overview of Nets Used
 ### VGG16
-VGG116 is a convolutional neural net designed by and trained by the Visual Geometry Group of Oxford. It has become popularized and used as the basis for many image based nets. VGG16 uses smaller filters in a deeper fashion. This allows for better handling of non-linear features, which tend to be important in images when looking for patterns. Within this repository a VGGG16 net that has been pretrained on ImageNet data is used. I truncated the net early and as result was able to use the output from one of the final dense layers as the input to me net. The summary of the net used can be found [here.](images/vgg_architecture.png)
+VGG116 is a convolutional neural net designed by and trained by the Visual Geometry Group of Oxford [(1)](#references). It has become popularized and used as the basis for many image based nets. VGG16 uses smaller filters in a deeper fashion. This allows for better handling of non-linear features, which tend to be important in images when looking for patterns. Within this repository a VGG16 net that has been pretrained on ImageNet data is used. I truncated the net early and as result was able to use the output from one of the final dense layers as the input to my net. The summary output of the net used can be found [here.](images/vgg_architecture.png)
+
+### LSTM
+
+### Bidirectional LSTM
 
 * RNN(LSTM, Bidirectional LSTM)
 
 ## Methodology
+### EDA
 ### Scraping
 ### Sample Data
 ### Processing
@@ -49,6 +66,7 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 ![predictions](images/blue.png)
 
 ![green](images/green.png)
+
 ![predictions](images/purple.png)
 
 
@@ -59,6 +77,8 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 
 ## Evaluations and Criticizing the Model
 ## Core ML
+## Other Applications
 ## Next Steps
 ## Tech Stack
 ## References
+ (1) [Very Deep Convolutional Networks for Large-Scale Image Recognition <br>K. Simonyan, A. Zisserman <br>arXiv:1409.1556](#https://arxiv.org/abs/1409.1556)
