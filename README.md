@@ -109,4 +109,4 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 ## References
 (1) Very Deep Convolutional Networks for Large-Scale Image Recognition  
 K. Simonyan, A. Zisserman  
-arXiv:1409.1556 [[link]](#https://arxiv.org/abs/1409.1556)
+arXiv:1409.1556 [[link]](https://arxiv.org/abs/1409.1556)
