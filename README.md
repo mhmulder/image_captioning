@@ -56,11 +56,7 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 ## Methodology
 ### Scraping
 ### EDA
-![cat hist](images/Cat_Hist.png)
-
-![word_count](images/Word_count.png)
-
-![word_count500](images/Word_count500.png)
+![cat hist](images/joint_Hist.png)
 
 ![word_cloud](images//Word_cloud.png)
 ### Sample Data
