@@ -82,7 +82,6 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 ## Results
 
 ![accuracy loss](images/acc_loss.png)
-### The Good
 
 | Epoch | Bed with Mattress | Wire Shelving | Night Stand | Groovy Book Case | Bar Stool | Hutch |
 | ----- | ----------------- | ------------- | ----------- | ---------------- | --------- | ----- |
@@ -94,9 +93,25 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 |25|air flow queensize box spring memory foam mattress set|tier sided wire shelf truck rods|hannah drawer nightstand white|folding portable laptop table portable laptop table home office black|adjustable height swivel bar stool|drawer lateral file cabinet classic oak|
 |50|continental gel memory foam mattress topper|capacity mobile unit wire shelves solid shelf|nightstand soft white|console table black|arctic contemporary black vinyl adjustable height barstool chrome base|ascent file cabinet polyvinyl chloride aluminum file drawers legal letter durable stain resistant locking|
 
-### The Bad
-### The Ugly
 
+### The Good
+
+| Example 1 | Example 2 | Example 3 | Example 4 | Example 5 |
+|-----------|-----------|-----------|-----------|-----------|
+|![good boockase](images/54708760_02.jpg)|![chair](images/505452280_00.jpg)|![bar_stool](images/939334816_00.jpg)|![good_mattress](images/604570556_03.jpg)|![mattress](images/23263072_01.jpg)
+| shelf bookcase antiqued oak |black leather executive office chair brown|pub table|gel memory foam mattress multiple sizes|modern contemporary urban design bedroom king size platform bed frame white fabric wood|
+
+### The Bad
+
+| Example 1 | Example 2 | Example 3 | Example 4 | Example 5 |
+|-----------|-----------|-----------|-----------|-----------|
+|![bad table](images/173427866_00.jpg)|![bad_bedroom](images/130599955_01.jpg)|![bad-bench](images/173548697_03.jpg)| ![bd-cart](images/20421831_01.jpg)|![bad-carpet](images/704170507_06.jpg)
+|heavy duty coffee table multiple colors|costway coffee table white|lancashire coffee table|computer desk keyboard|nba office chair brown
+### The Interesting
+| Example 1 | Example 2 | Example 3 | Example 4 | Example 5 |
+|-----------|-----------|-----------|-----------|-----------|
+|![chair](images/34618297_01.jpg)|![side table](images/55606070_00.jpg)|![comp_desk](images/130496362_09.jpg)|![great-chair](images/263564925_00.jpg)|![close-up](images/218325761_02.jpg)
+|hercules triple series triple triple braced hinged hinged padded folding guest chair set|tier plant shelf rack| adjustable computer desk keyboard black|contemporary adjustable height barstool chrome base multiple colors|abordale wood bar stool
 ## Evaluations and Criticizing the Model
 ## Core ML
 ## Other Applications
