@@ -18,15 +18,15 @@ Many large companies are exploring Augmented Reality ‘AR’ as it becomes main
     <th>Caption</th>
   </tr>
   <tr>
-    <td>![coffee table](images/coffeetable.png)</td>
+    <td><img src="images/coffeetable.png" /></td>
     <td>Wood Metal Coffee Table</td>
   </tr>
   <tr>
-    <td>![sectional sofa](images/sofa1.png)</td>
+    <td><img src="images/sofa1.png" /></td>
     <td>Black Modern Sectional Sofa</td>
   </tr>
   <tr>
-    <td>![bar stool](images/barstool1.png)</td>
+    <td><img src="images/barstool1.png" /></td>
     <td>Brown Modern Bar Stools</td>
   </tr>
 </table>
