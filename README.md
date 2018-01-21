@@ -12,6 +12,7 @@ If you are just here to read a notebook on how to build a image captioning net i
 Many large companies are exploring Augmented Reality ‘AR’ as it becomes mainstream. Walmart in particular is considering using this technology to enhance their home furnishings business. One goal is to take a photo from a room in a customer’s house and use AR to make recommendations for furniture they should add or swap out. Below is an example of the goal of this project.
 
 ### Example
+<center>
 <table align="center">
   <tr>
     <th>Image</th>
@@ -30,7 +31,7 @@ Many large companies are exploring Augmented Reality ‘AR’ as it becomes main
     <td>Brown Modern Bar Stools</td>
   </tr>
 </table>
-
+</center>
 
 ## Table of Contents
 1. [Overview of Nets Used](#overview-of-nets-used)
