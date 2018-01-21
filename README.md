@@ -88,8 +88,8 @@ VGG116 is a convolutional neural net designed by and trained by the Visual Geome
 ![accuracy loss](images/acc_loss.png)
 ### The Good
 
-| Epoch | Bed with Mattress | Wire Shelving| Night Stand | Groovy Book Case | Bar Stool | Hutch |
-| ----- | ----------------- | -------------------------- | ---------------- | --------- | ----- |
+| Epoch | Bed with Mattress | Wire Shelving | Night Stand | Groovy Book Case | Bar Stool | Hutch |
+| ----- | ----------------- | ------------- | ----------- | ---------------- | --------- | ----- |
 
 
 <br><br>
