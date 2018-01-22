@@ -56,7 +56,7 @@ LSTM's are based on the same architecture as an RNN but they also have additiona
 `The first rule about Fight Club is you do not talk about ______.`
 
 #### Bidirectional LSTM's
-Bidirectional LSTM's are very similar to LSTM's but they are designed such that not only does the prior words in a sequence matter but so do the future words. This can be though of in terms of sequences and context again, as humans also learn in this way.  
+Bidirectional LSTM's are very similar to LSTM's but they are designed such that not only does the prior words in a sequence matter but so do the future words. It does this by reversing the sequence and running a traditional LSTM on it. This can be thought of in terms of sequences and context, as humans also learn in this way.  
 
 If I give just the first portion of a text it is difficult to predict the next word:
 
@@ -66,7 +66,21 @@ But if I give you the last part of the sentence, certainly you can fill out the 
 
 `There's no _____ like home.`
 
-Bidirectional recurrent neural nets essentially do the same thing by training both backwards and forwards through a sequence. These nets are fantastic learners but can be computationally intensive. Other flavors of RNN's can be used bidirectionally such as GRU's and vanilla RNN's
+Bidirectional recurrent neural nets essentially do the same thing by training both backwards and forwards through a sequence. However they would this is a both:
+
+`There's no place like home.`
+
+and
+
+`home like place no There's`
+
+Visually it looks something like this:
+
+<p align="center">
+![my-bidirectional-RNN](images/bidirectional_rnn.png)
+</p>
+
+These nets are fantastic learners but can be computationally intensive. Other flavors of RNN's can be used bidirectionally such as GRU's and vanilla RNN's
 
 In this model it is not strictly necessarily to use a bidirectional LSTM but it certainly provides much better results. They have also been used in neural machine translation (language to language) [(3)](#references), protein structure prediction [(4)](#references), and reconstructing gaps in time series data [(5)](#references).
 
@@ -114,7 +128,7 @@ The stored image arrays (shown in red), go through a dense layer. Then 10% of th
 
 The stored text descriptions (blue) are passed through an LSTM and into a time distributed dense layer, which allows for sequence handling out of the LSTM.
 
-At this point (1C). The data is concatenated together and passed through a bidirectional LSTM after which a 10% dropout is applied. From there the output is passed into a dense layer with nodes corresponding to each word in the vocabulary (5544 words). A softmax activation is applied and probabilities for each word are returned. These results are then compared to the expected description using a categorical cross-entropy loss function, and weights are back propagated using a Nesterov Adam optimizer, with default parameters. This is all shown in the figure in green.
+At this point (1C). The data is concatenated together and passed through a bidirectional LSTM after which a 10% dropout is applied. From there the output is passed into a dense layer with nodes corresponding to each word in the vocabulary (5544 words). A softmax activation is applied and probabilities for each word are returned. These results are then compared to the expected description using a categorical cross-entropy loss function, and weights are back propagated using a Nesterov Adam optimizer, with default parameters. This is all shown in the figure in green. To view the Keras architecture summary click [here.](images/keras_summary.png)
 
 <p align="center">
 <img src="images/green.png">
