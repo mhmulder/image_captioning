@@ -32,12 +32,13 @@ Many large companies are exploring Augmented Reality ‘AR’ as it becomes main
 1. [Overview of Nets Used](#overview-of-nets-used)
 2. [Methodology](#methodology)
     * [Scraping](#scraping)
-    * [Sample Data](#sample-data)
-    * [Processing](#processing)
+    * [EDA and Processing](#eda-and-pre-processing)
+    * [Data Processing](#data-processing)
     * [Net Architecture](#net-architecture)
+    * [Predictions](#making-predictions)
 3. [Results](#results)
-4. [Criticisms of the Model](#evaluations-and-criticizing-the-model)
-5. [Core ML](#core-ml)
+4. [Criticisms of the Model](#evaluating-and-criticizing-the-model)
+5. [Other Applications](#other-applications)
 6. [Next Steps](#next-steps)
 7. [Tech Stack](#tech-stack)
 8. [References](#references)
@@ -77,7 +78,7 @@ and
 Visually it looks something like this:
 
 <p align="center">
-<img src="images/bidirectional_rnn.png">
+<img src="images/bidirectional_rnn1.png">
 </p>
 
 These nets are fantastic learners but can be computationally intensive. Other flavors of RNN's can be used bidirectionally such as GRU's and vanilla RNN's
@@ -92,7 +93,7 @@ This project took on many steps, from web scraping for the data to determining h
 
 Product ID's were scraped off of Walmart's website using beautiful soup and then passed through their API in order to get image URL's, names, prices, etc. I automated this process to store the information in a mongodb database in the cloud (EC2), as I would need to access the information when processing the image for the net. An example of the results from the API call can be found [here](images/example_api_call.html), this the example from WalMart's website, the data I used was specific to furniture [(6)](#references).
 
-### EDA and Pre-processing
+### EDA and Pre-Processing
 
 Once the data was scraped I was able to actually begin analyzing the scope of my problem. After looking at the data I realized there were 93 different categories n the furniture section and furthermore the categories were not evenly distributed. This can be seen in Figure 1 (left). This would make it very difficult to do any basic classification as the model for creating descriptions. Furthermore, there is also a poor distribution of words, they were clearly correlated with the category imbalance. A histogram of the Top 500 word counts can be found in Figure 1 (right).
 
@@ -189,7 +190,7 @@ After reviewing the data I determined that it was indeed possible that the model
 |hercules triple series triple triple braced hinged hinged padded folding guest chair set|tier plant shelf rack| adjustable computer desk keyboard black|contemporary adjustable height barstool chrome base multiple colors|abordale wood bar stool
 | The repetition of words looks like the net almost didn't train long enough.| I guess I could see a plant rack, although I certainly wouldn't call it that.| This one was really specific, although the fact it included keyboard was interesting to me.|I'm really impressed that this one got the chrome base.| Close up, not perfect but certainly took me a second to identify what it is.
 
-## Evaluations and Criticizing the Model
+## Evaluating and Criticizing the Model
 
 This is an inherently difficult task to evaluate. Certainly accuracy is a poor metric to judge this task. I attempted to evaluate variations of these models in two fashions.
 
