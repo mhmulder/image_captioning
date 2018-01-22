@@ -221,12 +221,6 @@ This technology has lots of applications:
 <p align="center">
 <img src="images/tech_stack.png">
 </p>
-* Python
-* AWS EC2
-* Keras
-* MongoDB
-* Tensorboard
-* Spacy NLP
 
 
 
