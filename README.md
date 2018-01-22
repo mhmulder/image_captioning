@@ -77,7 +77,7 @@ and
 Visually it looks something like this:
 
 <p align="center">
-![my-bidirectional-RNN](images/bidirectional_rnn.png)
+<img src="images/bidirectional_rnn.png">
 </p>
 
 These nets are fantastic learners but can be computationally intensive. Other flavors of RNN's can be used bidirectionally such as GRU's and vanilla RNN's
@@ -101,11 +101,12 @@ Once the data was scraped I was able to actually begin analyzing the scope of my
 <b>Figure 1:</b> Histograms of Categories and Words of Scraped Data
 </p>
 
-Stopwords, punctuation and brand names, were removed and a word cloud was generated in order to easily determine which words and phrases were the most common (Figure 2)
+Stopwords, punctuation and brand names, were removed and a word cloud was generated in order to easily determine which words and phrases were the most common (Figure 2). [(7)](#references)
 
 ![word_cloud](images//Word_cloud.png)
 <p align="center">
-<b>Figure 2:</b> Word Cloud of Name Data Scraped from API [(7)](#references) </p>
+<b>Figure 2:</b> Word Cloud of Name Data Scraped from API
+</p>
 
 It's clear we have an overwhelming amount of chairs and stools. Looking forward, this suggests we may end up over fitting the net on chairs and bar stools. That will certainly be something to consider in the future.  
 
