@@ -175,11 +175,42 @@ After reviewing the data I determined that it was indeed possible that the model
 
 ## Evaluations and Criticizing the Model
 
+This is an inherently difficult task to evaluate. Certainly accuracy is a poor metric to judge this task. I attempted to evaluate variations of these models in two fashions.
 
-## Core ML / Flask
+First, I took each predicted descriptions and real description and lemmatized them using an NLP engine, Spacy. Then I vectorized them and used cosine similarity to gauge how similar the strings were. This model seemed to work pretty well but it also has it's problems. The real description for an image might be black computer chair, the predicted description might be mesh adjustable office chair. Although both descriptions are correct they have different words as a result they might have high cosine similarity scores. Still, this method seemed to perform pretty well.
+
+Second, I created a simple human evaluation scoring system. I would visually look at the image and predictions and rate on a scale of 1 to 5 whether the prediction was a great fit. An excellent match was a 5, a 'okay I can see that' was a 3, and a miss was a 0. I would test 40 images and average their scores. Although it wasn't a perfect match my scores were correlated with the cosine similarity scores. Thus I used a mixture of both methods to evaluate and iterate through my models, unfortunately I was not able to find a perfect substitute for human evaluation.
+
+Based on the results I've seen I have generally been really pleased with the models. As expected the model works incredibly well on chairs and stools, even close up examples. The model seems to fail on more abstract objects or objects at bizarre angles. In pictures with multiple objects, the model does not necessarily predict the main object, it might predict a set or another object in the room. As a proof of concept, I am incredibly pleased with the results of this model.
+
 ## Other Applications
+
+This technology has lots of applications:
+* This model could be used as the beginning to an image searching algorithm
+  * Instead of searching an image by its label, you can actually search by whats in it
+  * You could use whats in an image to make recommendations for similar objects or recommended objects based on a recommendation engine
+* You can use this to help classify images when there are perhaps too many categories to predict traditionally
+* A similar technology could be used to write descriptions for videos or audio, which would certainly help searching for those as well.
+* This could be applied to frame by frame video screening, where an algorithm would alert someone when it recognized a certain pattern or description in the frames. You could chain on another LSTM to actually analyze sequences of video frames as well.
+
 ## Next Steps
+* Create a core ml or flask app
+* Create search functionality that would search for similar images online
+* Build a recommendation engine that recommends items not in the image that match the style
+* Continue testing variations of the net
+* Try different CNN configurations (VGG19, GoogLe Net, etc.)
+
 ## Tech Stack
+
+* Python
+* AWS EC2
+* Keras
+* MongoDB
+* Tensorboard
+* Spacy NLP
+
+
+
 ## References
 (1) Very Deep Convolutional Networks for Large-Scale Image Recognition<br>
 K. Simonyan, A. Zisserman<br>
