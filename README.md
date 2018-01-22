@@ -118,7 +118,7 @@ A subset of 20k images was used and selected randomly from the database. Each im
 <img src="images/red.png">
 </p>
 
-The text data was cleaned and '<start>' and '<end>' tokens were created. From here a vocabulary dictionary was created, linking words to indices and indices to words. The text was then encoded with the indices and 0's were added after to pad the length of each sequence to the length of the longest description. These arrays were then sequenced and stored for use in the LSTM. This process can be seen in the blue image below.
+The text data was cleaned and `<start>` and `<end>` tokens were created. From here a vocabulary dictionary was created, linking words to indices and indices to words. The text was then encoded with the indices and 0's were added after to pad the length of each sequence to the length of the longest description. These arrays were then sequenced and stored for use in the LSTM. This process can be seen in the blue image below.
 <p align="center">
 <img src="images/blue.png">
 </p>
@@ -187,6 +187,7 @@ After reviewing the data I determined that it was indeed possible that the model
 |-----------|-----------|-----------|-----------|-----------|
 |![chair](images/34618297_01.jpg)|![side table](images/55606070_00.jpg)|![comp_desk](images/130496362_09.jpg)|![great-chair](images/263564925_00.jpg)|![close-up](images/218325761_02.jpg)
 |hercules triple series triple triple braced hinged hinged padded folding guest chair set|tier plant shelf rack| adjustable computer desk keyboard black|contemporary adjustable height barstool chrome base multiple colors|abordale wood bar stool
+| The repetition of words looks like the net almost didn't train long enough.| I guess I could see a plant rack, although I certainly wouldn't call it that.| This one was really specific, although the fact it included keyboard was interesting to me.|I'm really impressed that this one got the chrome base.| Close up, not perfect but certainly took me a second to identify what it is.
 
 ## Evaluations and Criticizing the Model
 
@@ -217,6 +218,9 @@ This technology has lots of applications:
 
 ## Tech Stack
 
+<p align="center">
+<img src="images/tech_stack.png">
+</p>
 * Python
 * AWS EC2
 * Keras
