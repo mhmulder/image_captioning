@@ -45,7 +45,6 @@ def process_string(string, count_dict):
     paramters:
     --------------------------
     string (str) -> A string to process
-
     count_dict (dict) -> A dictionary with words and their corresponding counts
 
     returns:
@@ -82,9 +81,8 @@ def run_query(query, collection):
     paramters:
     --------------------------
     query (str) -> A query to run through MongoDB
-
     collection (MongoDB collection) -> A collection containing the
-    information for all product ID's
+        information for all product ID's
 
     returns:
     --------------------------
@@ -105,7 +103,6 @@ def df_cleaning_func(df, count_dict):
     paramters:
     --------------------------
     df (pandas DataFrame) -> A dataframe with strings to process
-
     count_dict (dict) -> A dictionary with words and their corresponding counts
 
     returns:
@@ -136,9 +133,7 @@ def caption_mapping(filename, images_dir, item_desc_dict):
     paramters:
     --------------------------
     filename (str) -> The name or path of the resulting csv
-
     images_dir (list) -> A list of all image names
-
     item_desc_dict(dict) => A dictionary of descriptions and the image names
 
     returns:
