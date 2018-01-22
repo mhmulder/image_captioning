@@ -1,72 +1,121 @@
 import numpy as np
 import pandas as pd
-# from pymongo import MongoClient
-
-# from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS
 import os
-
 from keras.preprocessing import image, sequence
 from keras.applications import VGG16
 from keras.models import  Model
-
+from keras.preprocessing.image import load_img, img_to_array
+from keras.applications.vgg16 import preprocess_input
 import pickle
 
+def image_preprocess(img):
+    """
+    Use Keras built in image processing for VGG16, basically converts the image
+    to an array, switches from RGB to BGR, and centers the mean
 
-def preprocess_input(img):
-    # convert from RGB to BGR
-    # subtract means from imagenet to center around zero,
-    # means are [123.68, 116.78, 103.94] RGB
-    img = img[:, :, :, ::-1] #RGB to BGR
-    img[:, :, :, 0] -= 103.94
-    img[:, :, :, 1] -= 116.78
-    img[:, :, :, 2] -= 123.68
-    return img
+    paramters:
+    --------------------------
+    img (str) -> The name of an image
 
-def preprocessing(img_path):
-    img = image.load_img(img_path, target_size=(224,224,3))
-    img = image.img_to_array(img)
-    img = np.expand_dims(img, axis=0)
-    img = preprocess_input(img)
-    return img
+    returns:
+    --------------------------
+    imag (np array) -> A numpy array of size (3, 244, 244),  that is ready for
+        VGG16 encoding
+    """
+    imag = load_img(img, target_size=(224, 224))
+    imag = img_to_array(imag)
+    imag = imag.reshape((1, imag.shape[0], imag.shape[1], imag.shape[2]))
+    imag = preprocess_input(imag)
+    return imag
+
 
 def get_encoding(model, img):
-    image = preprocessing(images_path+img)
-    pred = model.predict(image)
-    features = np.reshape(pred, pred.shape[1])
+    """
+    Applies the VGG16 encoding to an img, (basically just returns a prediction).
+
+    paramters:
+    --------------------------
+    model (keras model) -> The VGG16 model that creates the feature prediction
+    img (np array) -> A preprocessed numpy array ready for prediction
+
+    returns:
+    --------------------------
+    features (np array) -> A numpy array containing the predicted features of
+        the image.
+    """
+    imag = image_preprocess(images_path + img)
+    prediction = model.predict(imag)
+    features = np.reshape(prediction, prediction.shape[1])
     return features
 
-def vocab_from_df(df):
-    sentences = list(df['descriptions'].values)
-
-    words_in_each_sentence = [i.split() for i in sentences]
-    unique = []
-    for i in words_in_each_sentence:
-        unique.extend(i)
-
-    unique = sorted(list(set(unique)))
-
-
-    return sentences
 
 def load_vgg16_model():
-    vgg16 = VGG16(weights='imagenet', include_top=True, input_shape=(224,224,3))
+    """
+    Loads the VGG16 model from keras and truncates the last two layers.
+
+    paramters:
+    --------------------------
+    None, the model is loaded into memory
+
+    returns:
+    --------------------------
+    vgg (keras model) -> The VGG16 Model
+    """
+    vgg16 = VGG16(weights='imagenet', include_top=True,
+                  input_shape=(224, 224, 3))
     vgg = Model(inputs=vgg16.input, outputs=vgg16.layers[-2].output)
     return vgg
 
-def encode_images_with_model_features(df, model, pickle_filename, verbose = False):
+def encode_images_with_model_features(df, model,
+                                      pickle_filename, verbose = False):
+    """
+    Runs through each item in a df with an image name column through a keras
+    model to get features. It then saves those features in a pkl file and
+    returns them if needed for later.
+
+    paramters:
+    --------------------------
+    df (pandas DataFrame) -> A dataframe containing a 'image_name' column that
+        contains names of images to be encoded.
+    model (keras model) -> The VGG16 model that creates the feature prediction
+    pickle_filename (str) -> the name of the pkl file to create
+    verbose (bool) -> If true the output will have print statements every 100
+        images
+
+    returns:
+    --------------------------
+    encoded_images (dict) -> A dictionary where each encoding is the value and
+        the image name is the key
+    A pickle object is also created
+    """
     encoded_images = {}
     i = 0
     for img in df['image_name']:
         encoded_images[img] = get_encoding(model, img)
         i += 1
         if i % 100 == 0 and verbose == True:
-            print ('Enoded: {} images.'.format(i))
+            print('Enoded: {} images.'.format(i))
     with open( pickle_filename, "wb" ) as pickle_f:
         pickle.dump(encoded_images, pickle_f )
-    if verbose: print ('pickle created as {}'.format(pickle_filename))
+    if verbose:
+        print('pickle created as {}'.format(pickle_filename))
     return encoded_images
 
+
 def instantiate_vocab_stats(df):
+    """
+    Applies the VGG16 encoding to an img, (basically just returns a prediction).
+
+    paramters:
+    --------------------------
+    model (keras model) -> The VGG16 model that creates the feature prediction
+    img (np array) -> A preprocessed numpy array ready for prediction
+
+    returns:
+    --------------------------
+    features (np array) -> A numpy array containing the predicted features of
+        the image.
+    """
     sentences = list(df['description'])
     tokens = [sentence.split() for sentence in sentences]
     words = [token for sublist in tokens for token in sublist]

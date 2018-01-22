@@ -67,7 +67,7 @@ But if I give you the last part of the sentence, certainly you can fill out the 
 
 `There's no _____ like home.`
 
-Bidirectional recurrent neural nets essentially do the same thing by training both backwards and forwards through a sequence. However they would this is a both:
+Bidirectional recurrent neural nets essentially do the same thing by training both backwards and forwards through a sequence. The above phrase would be interpreted as both:
 
 `There's no place like home.`
 
