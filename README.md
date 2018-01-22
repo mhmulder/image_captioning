@@ -84,14 +84,14 @@ Once the data was scraped I was able to actually begin analyzing the scope of my
 
 ![cat hist](images/joint_Hist.png)
 <p align="center">
-__Figure 1:__ Histograms of Categories and Words of Scraped Data
+**Figure 1:** Histograms of Categories and Words of Scraped Data
 </p>
 
 Stopwords, punctuation and brand names, were removed and a word cloud was generated in order to easily determine which words and phrases were the most common (Figure 2)
 
 ![word_cloud](images//Word_cloud.png)
 <p align="center">
-__Figure 2:__ Word Cloud of Name Data Scraped from API [(7)](#references) </p>
+**Figure 2:** Word Cloud of Name Data Scraped from API [(7)](#references) </p>
 
 It's clear we have an overwhelming amount of chairs and stools. Looking forward, this suggests we may end up over fitting the net on chairs and bar stools. That will certainly be something to consider in the future.  
 
@@ -138,7 +138,7 @@ The model was built using Keras' functional API. Tensorboard was used for visual
 First, lets look at a traditional metric, accuracy. Figure 3 shows how the Loss and Accuracy changed over time for both a validation set and the training set. Based on the validation loss it is clear to me there is likely some overfitting on the training data, after about epoch 8. That said an accuracy of about 30% is pretty incredible when predicting from over 5544 words.
 ![accuracy loss](images/acc_loss.png)
 <p align="center">
-__Figure 3:__ Training and Validation Loss and Accuracy </p>
+**Figure 3:** Training and Validation Loss and Accuracy </p>
 
 I was still a little resistant, if accuracy is still increasing shouldn't I just keep training. I ended up writing a function to run an epoch, make predictions on hold out data, store the results, then repeat for 50 epochs. This way I could actually visually determine if the model was overfitting and the results were being skewed. This data can be found below for select images.
 
