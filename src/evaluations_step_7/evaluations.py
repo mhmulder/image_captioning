@@ -151,22 +151,18 @@ def argmax_pred_caption(filepath):
     (str) -> The caption generated
     """
     image = get_encoding(vgg, filepath)
-    caption = ["<start>"]
+    prediction_idx = [1] # ! is index for <start>
     while True:
-        prediction_idx = [word_2_indices[word] for word in caption]
         padded_sequence = sequence.pad_sequences([prediction_idx],
                                                  maxlen=max_len,
                                                  padding='post')
-        im_arr = np.array([image])
-        pad_seq_arr = np.array(padded_sequence)
-        prediction = model.predict([im_arr, pad_seq_arr])
-        top_index = np.argmax(prediction[0], axis=0)
-        top_word = indices_2_word[top_index]
-        caption.append(top_word)
-
-        if top_word == '<end>' or len(caption) >= max_len:
+        result = model.predict([np.array([image]), padded_sequence])
+        sorted_results = np.argsort(result)
+        top_result = sorted_results[0][-1]
+        prediction_idx.append(top_result)
+        if top_result == 0 or len(prediction_idx) >= max_len:
             break
-    return ' '.join(caption[1:-1])
+    return (" ".join([indices_2_word[idx] for idx in prediction_idx[1:-1]]))
 
 
 def beam_search_decoder(filepath, k=3):
@@ -182,7 +178,42 @@ def beam_search_decoder(filepath, k=3):
     --------------------------
     (str) -> The caption generated
     """
-    pass
+    image = get_encoding(vgg, filepath)
+    prediction_idx = [[[1], 0.0]] # 1 is index for <start>
+    while len(prediction_idx[0][0])< max_len:
+        candidates = []
+        for i in range (len(prediction_idx)):
+            seq = prediction_idx[i][0]
+            padded_sequence = sequence.pad_sequences([seq],
+                                                 maxlen=max_len,
+                                                 padding='post')
+            result = model.predict([np.array([image]), padded_sequence])
+            sorted_results = np.argsort(result[0])[-k:]
+            top_k_result = sorted_results[-k:]
+            top_k_probs = result[0][top_k_result]
+            for n in range (k):
+                new_seq = prediction_idx[i][0].copy()
+                score = prediction_idx[i][1]
+
+                new_seq.append(top_k_result[n])
+                score = prediction_idx[i][1]
+                new_score = score + top_k_probs[n]
+                candidates.append([new_seq, new_score])
+        prediction_idx = candidates
+        prediction_idx = sorted(prediction_idx, reverse=False, key=lambda tup:tup[1])
+        prediction_idx = prediction_idx[-k:]
+    prediction_idx = prediction_idx[-1][0]
+
+    final_description = []
+
+    for i in prediction_idx:
+        if i != 0:
+            final_description.append(i)
+        else:
+            break
+    final_words = [indices_2_word[i] for i in final_description]
+    final_words = ' '.join(final_words[1:])
+    return final_words
 
 
 def cosine_sim_test(image_name, df, vgg, verbose=False):
@@ -358,6 +389,7 @@ if __name__ == '__main__':
     test_path = '../../data/image_description_pair_20k_test.csv'
 
     df_train = pd.read_csv(train_path)
+    df_test = pd.read_csv(test_path)
 
     vocab_size, max_len, unique_words = instantiate_vocab_stats(df_train)
 
@@ -365,8 +397,7 @@ if __name__ == '__main__':
     vgg = load_vgg16_model()
     print('VGG loaded')
 
-    df_train = pd.read_csv(train_path)
-    df_test = pd.read_csv(train_path)
+
 
     model = load_model('../../data/256_20kimages9epochs.h5')
     print('My model loaded')
@@ -380,6 +411,6 @@ if __name__ == '__main__':
     argmax = argmax_pred_caption(image_name)
     print('Caption is: ', argmax)
 
-    # print('Make Beam prediction')
-    # argmax = beam_search_predictions(image, 5)
-    # print('Caption is: ', argmax)
+    print('Make Beam prediction')
+    argmax = beam_search_predictions(image, 5)
+    print('Caption is: ', argmax)
