@@ -116,12 +116,12 @@ It's clear we have an overwhelming amount of chairs and stools. This is potentia
 A subset of 20k images was randomly selected from the database. Each image was resized to (244, 244, 3), and the BGR values were centered around zero by subtracting the mean of the ImageNet values [(1)](#references). Next the image was processed through VGG16 (ImageNet weights) and encoded into a 4096 size array. These arrays were then stored for use in the net. This can be shown in red image below.
 
 <p align="center">
-<img src="images/image_processing.png">
+<img src="images/image_processing_1.png">
 </p>
 
 The text data was cleaned and `<start>` and `<end>` tokens were created. From here a vocabulary dictionary was created, linking words to indices and indices to words. Based off of the cleaned descriptions for the 20k images there were 5544 words including both start and end tokens. The text was then encoded with the indices and 0's were added after to pad the length of each sequence to the length of the longest description. The longest cleaned description in the dataset was 30 words, which seems high but its easy to truncate the descriptions after only a few words, and the LSTM portions of the net learn this as they train.  These arrays were then sequenced and stored for use in the LSTM. This process can be seen in the blue image below.
 <p align="center">
-<img src="images/text_processing.png">
+<img src="images/text_processing_1.png">
 </p>
 
 ### Net Architecture
@@ -133,7 +133,7 @@ The stored text descriptions (blue) are first passed into an embedding layer. An
 At this point (1C). The data is concatenated together and passed through a bidirectional LSTM after which a 10% dropout is applied. From there the output is passed into a dense layer with nodes corresponding to each word in the vocabulary (5544 words). A softmax activation is applied and probabilities for each word are returned. These results are then compared to the expected description using a categorical cross-entropy loss function, and weights are back propagated using a Nesterov Adam optimizer, with default parameters. This is all shown in the figure in green. To view the Keras architecture summary click [here.](images/keras_summary.png)
 
 <p align="center">
-<img src="images/net_arch.png">
+<img src="images/net_arch_1.png">
 </p>
 
 ### Making Predictions
@@ -141,10 +141,10 @@ At this point (1C). The data is concatenated together and passed through a bidir
 There are two methods to create predictions with an LSTM. The first is an argmax search. This is done by taking the word with the highest probability and feeding it back into the LSTM to determine the next word. Once, you get the results, you take the word with the highest probability, and feed the entire sequence back into the LSTM. This continues until a stop token is encountered! The argmax method is quick and easy and generally works pretty well. This method is shown in purple.
 
 <p align="center">
-<img src="images/prediction.png">
+<img src="images/prediction_1.png">
 </p>
 
-An even better approach is to use the Beam search algorithm. The Beam search algorithm essentially uses the top 'n' predictions and generates probabilities, it then runs predictions on all 'n' of those terms and continues. At the end of the sequence, all paths are compared, and the path with highest probability is chosen. This is a very computationally intensive algorithm and is generally restricted to an 'n' of 3 or 5 and the other results are pruned. When evaluating below the Beam score with index 5 was used.
+An even better approach is to use the Beam search algorithm. The Beam search algorithm essentially uses the top 'n' predictions and generates probabilities, it then runs predictions on all 'n' of those terms and continues. And the end of each iteration all paths are compared, and the path with top 'n' predictions are chosen to continue the sequence. This process is continued until the end of the max sequence length and at this point the path with the highest combined probability is description chose. This is a very computationally intensive algorithm and is generally restricted to an 'n' of 3 or 5 and the other results are pruned. When evaluating below the Beam score with index 5 was used.
 
 
 ## Results
@@ -210,8 +210,9 @@ This technology has lots of applications:
 * A similar technology could be used to write descriptions for videos or audio, which would certainly help searching for those as well.
 * This could be applied to frame by frame video screening, where an algorithm would alert someone when it recognized a certain pattern or description in the frames. You could chain on another LSTM to actually analyze sequences of video frames as well.
 
-## Next Steps
-* Create a core ml or flask app
+## Next Steps and Future Improvements
+* Limit the max sequence length to fewer words and use more images
+* Create a core ml or flask app that recommends similar Walmart products
 * Create search functionality that would search for similar images online
 * Build a recommendation engine that recommends items not in the image that match the style
 * Continue testing variations of the net
