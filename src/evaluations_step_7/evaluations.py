@@ -241,9 +241,9 @@ def cosine_sim_test(image_name, df, vgg, verbose=False):
     clean_caption = df[df['image_name'] == image_name]['description'].values[0]
     real_cap = df[df['image_name'] == image_name]['real_description'].values[0]
 
-    predicted_caption = stemmer(predicted_caption)
-    clean_caption = stemmer(clean_caption)
-    real_cap = stemmer(real_cap)
+    predicted_caption = lemmatizer(predicted_caption)
+    clean_caption = lemmatizer(clean_caption)
+    real_cap = lemmatizer(real_cap)
 
     clean_caption = clean_caption.split(" ")[1:-1]
     if verbose:
@@ -320,7 +320,7 @@ def cosine_eval(test_images, df, return_ones=False):
     return pred_clean_score, pred_real_score
 
 
-def human_eval(test_images, df):
+def human_eval(test_images):
     # only runs in jupyter as of now
     """
     takes a list of images and displays its predicted caption and the real
@@ -339,19 +339,12 @@ def human_eval(test_images, df):
     """
     scores = []
     for image_name in test_images:
-        img = Image.open(images_path+image)
-        test_img = get_encoding(vgg, image_name)
-
+        img = Image.open(images_path+image_name)
         z = img.resize((300, 300), Image.ANTIALIAS)
         display(z)
 
-        predicted_caption = argmax_pred_caption(test_img)
-        rc = df[df['image_name'] == image_name]['real_description'].values[0]
-
-        rc = set(rc.lower().split(" "))
-        print('Real: ', " ".join(rc))
-        predicted_caption = set(predicted_caption.split(" "))
-        print('Prediction: ', " ".join(predicted_caption))
+        predicted_caption = argmax_pred_caption(image_name)
+        print('Prediction: ', predicted_caption)
 
         score = int(input("On a scale of 0-5 how relevant are the words" +
                           "in the picture?\n >>>"))
@@ -362,7 +355,7 @@ def human_eval(test_images, df):
     return scores
 
 
-def stemmer(string):
+def lemmatizer(string):
     """
     Uses spaCy to lemmatize the words so that when doing the cosine similarity
     only the lemmatized version of the word is used.
@@ -412,5 +405,5 @@ if __name__ == '__main__':
     print('Caption is: ', argmax)
 
     print('Make Beam prediction')
-    argmax = beam_search_predictions(image, 5)
+    argmax = beam_search_decoder(image, 5)
     print('Caption is: ', argmax)

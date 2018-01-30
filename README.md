@@ -3,9 +3,9 @@
 
 
 ## Overview
-This repository contains an image captioning/description net that Automatically writes captions for images containing furniture..
+This repository contains an image captioning/description net that automatically writes captions for images containing furniture.
 
-If you are just here to read a notebook on how to build a image captioning net in Keras 2 and TensorFlow, you can follow through the notebook [here!](#notebook-that-doesn't exist yet)
+If you are just here to read a notebook on how to build a image captioning net in Keras 2 and TensorFlow, you can follow through the notebook [here!](#image_captioning_notebook.ipynb)
 
 ## Motivation
 
@@ -49,10 +49,10 @@ Many large companies are exploring Augmented Reality ‘AR’ as it becomes main
 VGG116 is a convolutional neural net designed by and trained by the Visual Geometry Group of Oxford [(1)](#references). It has become popularized and used as the basis for many image based nets. VGG16 uses smaller filters in a deeper fashion. This allows for better handling of non-linear features, which tend to be important in images when looking for patterns. Within this repository a VGG16 net that has been pretrained on ImageNet data is used. I truncated the net early and as result was able to use the output from one of the final dense layers as the input to my net. The summary output of the net used can be found [here.](images/vgg_architecture.png)
 
 ### RNN
-Long short term memory (LTSM) nets are a specific flavor of recurrent neural nets (RNN). Recurrent neural nets have an amazing ability to handle sequences, and thus generate time based predictions. For example in generating a description it is helpful to know what words come before. Certain objects may only be described by specific words. In addition, RNN's and LSTM's are commonly used as alternatives to traditional ARIMA time series analysis. Any data that contains some sort of sequence in theory can be analyzed using an RNN, people in the past have used RNN's for handwriting recognition [(2)](#references), robotic heart surgery [(3)](#references), and learning the blues [(4)](#references). A traditional RNN has a node for each element in the sequence, and data is passed from node to node traditionally with a Rectified Linear Unit (ReLU) or tanh activation function [(5)](#references).
+Recurrent neural nets have an amazing ability to handle sequences, and thus generate time based predictions. For example in generating a description it is helpful to know what words come before. Certain objects may only be described by specific words. In addition, RNN's and LSTM's are commonly used as alternatives to traditional ARIMA time series analysis. Any data that contains some sort of sequence in theory can be analyzed using an RNN, people in the past have used RNN's for handwriting recognition [(2)](#references), robotic heart surgery [(3)](#references), and learning the blues [(4)](#references). A traditional RNN has a node for each element in the sequence, and data is passed from node to node traditionally with a Rectified Linear Unit (ReLU) or tanh activation function [(5)](#references).
 
 #### LSTM's
-LSTM's are based on the same architecture as an RNN but they also have additional weights that determine how long to store an item in memory. This allows them to have a longer memory. These weights are calculated internally and determined by training. To give you an example of how these nets learn, I bet you can finish the following sentence:
+Long short term memory (LTSM) nets are a specific flavor of recurrent neural nets (RNN). LSTM's are based on the same architecture as an RNN but they also have additional weights that determine how long to store an item in memory. This allows them to have a longer memory. These weights are calculated internally and determined by training. To give you an example of how these nets learn, I bet you can finish the following sentence:
 
 `The first rule about Fight Club is you do not talk about ______.`
 

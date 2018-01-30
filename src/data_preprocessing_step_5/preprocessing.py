@@ -171,7 +171,7 @@ def pad_sequences(df, max_len, vocab_size, word_2_indices):
 
     returns:
     --------------------------
-    padded_sequences (np array) -> An array of padded dequences
+    padded_sequences (np array) -> An array of padded sequences
     subsequent_words (np array) -> An array with the following word encoded
     """
     padded_sequences, subsequent_words = [], []
