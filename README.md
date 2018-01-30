@@ -5,7 +5,7 @@
 ## Overview
 This repository contains an image captioning/description net that automatically writes captions for images containing furniture.
 
-If you are just here to read a notebook on how to build a image captioning net in Keras 2 and TensorFlow, you can follow through the notebook [here!](#image_captioning_notebook.ipynb)
+If you are just here to read a notebook on how to build a image captioning net in Keras 2 and TensorFlow, you can follow through the notebook [here!](image_captioning_notebook.ipynb)
 
 ## Motivation
 
